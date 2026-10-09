@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+    
+    /* Brand color variables for theme-aware components */
+    --brand-primary: 221.2 83.2% 53.3%;
+    --brand-primary-foreground: 210 40% 98%;
+    --brand-secondary: 210 40% 96%;
+    --brand-muted: 210 40% 96%;
+    --brand-accent: 200 100% 95%;
+    
+    /* Chart and progress colors */
+    --progress-background: 210 40% 96%;
+    --progress-foreground: 221.2 83.2% 53.3%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 217.2 32.6% 17.5%;
+    --card-foreground: 210 40% 98%;
+    --popover: 217.2 32.6% 17.5%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 25%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 25%;
+    --muted-foreground: 215 20.2% 70%;
+    --accent: 217.2 32.6% 25%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 25%;
+    --input: 217.2 32.6% 20%;
+    --ring: 217.2 91.2% 59.8%;
+    
+    /* Brand color variables for dark theme - improved contrast */
+    --brand-primary: 217.2 91.2% 65%;
+    --brand-primary-foreground: 210 40% 98%;
+    --brand-secondary: 217.2 32.6% 25%;
+    --brand-muted: 217.2 32.6% 20%;
+    --brand-accent: 217.2 32.6% 30%;
+    
+    /* Chart and progress colors for dark theme - improved visibility */
+    --progress-background: 217.2 32.6% 20%;
+    --progress-foreground: 217.2 91.2% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* Mobile-first optimizations */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Prevent iOS zoom on input focus */
+    font-size: 16px;
+    /* Ensure proper touch scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+  
+  code {
+    @apply font-mono text-sm;
+  }
+  
+  pre {
+    @apply font-mono text-sm;
+  }
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-md;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+  
+  /* Focus styles */
+  .focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+  
+  /* Prevent scroll restoration and jumping */
+  html {
+    scroll-behavior: auto;
+  }
+  
+  /* Only use smooth scrolling for specific cases, not navigation */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+  
+  /* Prevent focus-induced scrolling */
+  *:focus {
+    scroll-margin: 0;
+  }
+  
+  /* Prevent scroll jumping on button clicks */
+  button:focus {
+    scroll-margin: 0;
+    scroll-behavior: auto;
+  }
+  
+  /* Sidebar specific scroll behavior */
+  .sidebar-nav button {
+    scroll-margin: 0;
+    scroll-behavior: auto;
+  }
+  
+  .sidebar-nav button:focus {
+    scroll-margin: 0;
+    scroll-behavior: auto;
+  }
+  
+  /* Custom scrollbar for code blocks */
+  .code-scroll::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .code-scroll::-webkit-scrollbar-track {
+    @apply bg-tech-800;
+  }
+  
+  .code-scroll::-webkit-scrollbar-thumb {
+    @apply bg-tech-600 rounded;
+  }
+}
+
+@layer components {
+  /* Security severity indicators */
+  .severity-critical {
+    @apply bg-security-critical-50 text-security-critical-700 border-security-critical-200;
+  }
+  
+  .severity-high {
+    @apply bg-security-high-50 text-security-high-700 border-security-high-200;
+  }
+  
+  .severity-medium {
+    @apply bg-security-medium-50 text-security-medium-700 border-security-medium-200;
+  }
+  
+  .severity-low {
+    @apply bg-security-low-50 text-security-low-700 border-security-low-200;
+  }
+  
+  .severity-safe {
+    @apply bg-security-safe-50 text-security-safe-700 border-security-safe-200;
+  }
+  
+  /* Dark mode severity styles - improved contrast */
+  .dark .severity-critical {
+    @apply bg-red-900/30 text-red-200 border-red-700 font-bold;
+  }
+  
+  .dark .severity-high {
+    @apply bg-orange-900/30 text-orange-200 border-orange-700 font-bold;
+  }
+  
+  .dark .severity-medium {
+    @apply bg-yellow-900/30 text-yellow-200 border-yellow-700 font-semibold;
+  }
+  
+  .dark .severity-low {
+    @apply bg-blue-900/30 text-blue-200 border-blue-700 font-medium;
+  }
+  
+  .dark .severity-safe {
+    @apply bg-green-900/30 text-green-200 border-green-700 font-medium;
+  }
+  
+  /* Animation utilities */
+  .animate-in {
+    animation-fill-mode: both;
+  }
+  
+  .animate-out {
+    animation-fill-mode: both;
+    animation-direction: reverse;
+  }
+  
+  /* Mobile-first responsive utilities */
+  .mobile-optimized {
+    /* Ensure proper touch targets */
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+  
+  .mobile-text {
+    /* Prevent iOS zoom on inputs */
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .mobile-scroll {
+    /* Smooth scrolling on all devices */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  
+  .mobile-safe-area {
+    /* iOS safe area support */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  /* Better mobile hover states */
+  @media (hover: hover) and (pointer: fine) {
+    .hover-desktop:hover {
+      @apply opacity-80;
+    }
+  }
+  
+  /* Mobile-specific text wrapping */
+  .mobile-break {
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+  
+  /* Ensure no horizontal scroll on mobile */
+  .mobile-container {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Mobile-friendly card layouts */
+  .mobile-card {
+    @apply p-3 sm:p-6;
+    @apply text-sm sm:text-base;
+    @apply gap-2 sm:gap-4;
+  }
+  
+  /* Mobile grid utilities */
+  .mobile-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+    @apply gap-3 sm:gap-4 lg:gap-6;
+  }
+  
+  /* Mobile flex utilities */
+  .mobile-flex {
+    @apply flex flex-col sm:flex-row;
+    @apply gap-2 sm:gap-4;
+    @apply items-stretch sm:items-center;
+  }
+}
